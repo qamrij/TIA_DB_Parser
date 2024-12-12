@@ -1,0 +1,1289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V19" />
+  <DocumentInfo>
+    <Created>2024-12-05T09:06:15.4689361Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V19 Update 1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V19 Update 1</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V19</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V19</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS DCC</DisplayName>
+        <DisplayVersion>V19</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, G220, S200, S210</DisplayName>
+        <DisplayVersion>V19</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V19</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V19 Update 1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V19 Update 1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V19 Update 1</DisplayVersion>
+      </Product>
+      <Product>
+        <DisplayName>WinCC Advanced / Unified PC</DisplayName>
+        <DisplayVersion>V19 Update 1</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.InstanceDB ID="0">
+    <AttributeList>
+      <AutoNumber>true</AutoNumber>
+      <DBAccessibleFromOPCUA>true</DBAccessibleFromOPCUA>
+      <DBAccessibleFromWebserver>true</DBAccessibleFromWebserver>
+      <HeaderAuthor />
+      <HeaderFamily />
+      <HeaderName />
+      <HeaderVersion>0.1</HeaderVersion>
+      <InstanceOfName>DP_Exchange</InstanceOfName>
+      <InstanceOfType>UDT</InstanceOfType>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Static">
+    <Member Name="ExchangeToChain" Datatype="&quot;DP_Exchange_ToChain&quot;" Remanence="Retain" Accessibility="Public">
+      <AttributeList>
+        <BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute>
+        <BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute>
+        <BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute>
+        <BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute>
+      </AttributeList>
+      <Sections>
+        <Section Name="None">
+          <Member Name="Communication" Datatype="&quot;Connection_Status&quot;">
+            <Sections>
+              <Section Name="None">
+                <Member Name="RunMode" Datatype="Bool">
+                  <StartValue>TRUE</StartValue>
+                </Member>
+                <Member Name="ConnectionFaulted" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="Work" Datatype="&quot;DP_StationBool&quot;">
+            <Sections>
+              <Section Name="None">
+                <Member Name="Depositor" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="TempDetect" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="Vibrators" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="WorkedBy" Datatype="&quot;DP_StationBool&quot;">
+            <Sections>
+              <Section Name="None">
+                <Member Name="Depositor" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="TempDetect" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="Vibrators" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="OutChainObstruction" Datatype="&quot;DP_StationBool&quot;">
+            <Sections>
+              <Section Name="None">
+                <Member Name="Depositor" Datatype="Bool">
+                  <StartValue>TRUE</StartValue>
+                </Member>
+                <Member Name="TempDetect" Datatype="Bool">
+                  <StartValue>TRUE</StartValue>
+                </Member>
+                <Member Name="Vibrators" Datatype="Bool">
+                  <StartValue>TRUE</StartValue>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="TimeWork" Datatype="&quot;DP_StationTime&quot;">
+            <Sections>
+              <Section Name="None">
+                <Member Name="Depositor" Datatype="DInt">
+                  <StartValue>0</StartValue>
+                </Member>
+                <Member Name="Vibrator1" Datatype="DInt">
+                  <StartValue>0</StartValue>
+                </Member>
+                <Member Name="Vibrator2" Datatype="DInt">
+                  <StartValue>0</StartValue>
+                </Member>
+                <Member Name="VIbrator3" Datatype="DInt">
+                  <StartValue>0</StartValue>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="AlmOKImmStopChain" Datatype="Bool">
+            <StartValue>TRUE</StartValue>
+          </Member>
+          <Member Name="Set_StrobeWorkReq" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="Set_StrobeWorkReqMouldBlock" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="RejByCycleInterruption" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="ChangeSpeedEna" Datatype="Bool">
+            <StartValue>TRUE</StartValue>
+          </Member>
+          <Member Name="MarkedByOpe" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="PresMould" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="Starved" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="DepositorEnabled" Datatype="Bool">
+            <StartValue>TRUE</StartValue>
+          </Member>
+          <Member Name="TempDetectorEnabled" Datatype="Bool">
+            <StartValue>TRUE</StartValue>
+          </Member>
+          <Member Name="LocalModeReq" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="Weight_StopInPhaseReq" Datatype="Bool">
+            <StartValue>TRUE</StartValue>
+          </Member>
+          <Member Name="Weight_AcusticReq" Datatype="Bool">
+            <StartValue>TRUE</StartValue>
+          </Member>
+          <Member Name="NoDoseAllowed" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="Dint" Datatype="Array[0..4] of DInt">
+            <Subelement Path="0">
+              <StartValue>0</StartValue>
+            </Subelement>
+            <Subelement Path="1">
+              <StartValue>0</StartValue>
+            </Subelement>
+            <Subelement Path="2">
+              <StartValue>0</StartValue>
+            </Subelement>
+            <Subelement Path="3">
+              <StartValue>0</StartValue>
+            </Subelement>
+            <Subelement Path="4">
+              <StartValue>0</StartValue>
+            </Subelement>
+          </Member>
+          <Member Name="TempDetect_ScaledValue" Datatype="Real">
+            <StartValue>25.82104</StartValue>
+          </Member>
+          <Member Name="VMasterAtCycleEnd" Datatype="Real">
+            <StartValue>312.455</StartValue>
+          </Member>
+          <Member Name="VMasterRegPos" Datatype="Real">
+            <StartValue>0.0</StartValue>
+          </Member>
+          <Member Name="Infeed_VMasterRegPos1" Datatype="Real">
+            <StartValue>0.0</StartValue>
+          </Member>
+          <Member Name="Infeed_VMasterRegPos2" Datatype="Real">
+            <StartValue>0.0</StartValue>
+          </Member>
+          <Member Name="Outfeed_VMasterRegPos1" Datatype="Real">
+            <StartValue>0.0</StartValue>
+          </Member>
+          <Member Name="Outfeed_VMasterRegPos2" Datatype="Real">
+            <StartValue>0.0</StartValue>
+          </Member>
+        </Section>
+      </Sections>
+    </Member>
+    <Member Name="ExchangeFromChain" Datatype="&quot;DP_Exchange_FromChain&quot;" Remanence="Retain" Accessibility="Public">
+      <AttributeList>
+        <BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute>
+        <BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute>
+        <BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute>
+        <BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute>
+      </AttributeList>
+      <Sections>
+        <Section Name="None">
+          <Member Name="Communication" Datatype="&quot;Connection_Status&quot;">
+            <Sections>
+              <Section Name="None">
+                <Member Name="RunMode" Datatype="Bool">
+                  <StartValue>TRUE</StartValue>
+                </Member>
+                <Member Name="ConnectionFaulted" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="Chain" Datatype="&quot;Exchange_FromChain&quot;">
+            <Sections>
+              <Section Name="None">
+                <Member Name="EnableMove" Datatype="Bool">
+                  <StartValue>TRUE</StartValue>
+                </Member>
+                <Member Name="StrobeWorkReq" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="StrobeWorkReqMouldBlock" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="CheckObstruction" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="MoveInMan" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="VMasterInPosition" Datatype="Bool">
+                  <StartValue>TRUE</StartValue>
+                </Member>
+                <Member Name="VMasterAtSpeed" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="Cfg_1Jog_0Move" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="ReqWork" Datatype="&quot;DP_StationBool&quot;">
+            <Sections>
+              <Section Name="None">
+                <Member Name="Depositor" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="TempDetect" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="Vibrators" Datatype="Bool">
+                  <StartValue>TRUE</StartValue>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="SetWorkedBy" Datatype="&quot;DP_StationBool&quot;">
+            <Sections>
+              <Section Name="None">
+                <Member Name="Depositor" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="TempDetect" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+                <Member Name="Vibrators" Datatype="Bool">
+                  <StartValue>FALSE</StartValue>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+          <Member Name="Set_MarkedByOpe" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="Set_RejByCycleInterruption" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="ChangeSpeedReq" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="LocalModeActived" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="LocalAbortReq" Datatype="Bool">
+            <StartValue>FALSE</StartValue>
+          </Member>
+          <Member Name="Selected" Datatype="Bool">
+            <StartValue>TRUE</StartValue>
+          </Member>
+          <Member Name="Dint" Datatype="Array[0..4] of DInt">
+            <Subelement Path="0">
+              <StartValue>0</StartValue>
+            </Subelement>
+            <Subelement Path="1">
+              <StartValue>0</StartValue>
+            </Subelement>
+            <Subelement Path="2">
+              <StartValue>0</StartValue>
+            </Subelement>
+            <Subelement Path="3">
+              <StartValue>0</StartValue>
+            </Subelement>
+            <Subelement Path="4">
+              <StartValue>0</StartValue>
+            </Subelement>
+          </Member>
+          <Member Name="SetPointSpeed" Datatype="Real">
+            <StartValue>25.0</StartValue>
+          </Member>
+          <Member Name="ActualSpeed" Datatype="Real">
+            <StartValue>0.0</StartValue>
+          </Member>
+        </Section>
+      </Sections>
+    </Member>
+    <Member Name="Std" Datatype="&quot;DP_Exchange_Std&quot;" Remanence="Retain" Accessibility="Public">
+      <AttributeList>
+        <BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute>
+        <BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute>
+        <BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute>
+        <BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute>
+      </AttributeList>
+      <Sections>
+        <Section Name="None">
+          <Member Name="ExchangeToGlobal" Datatype="&quot;Exchange_ToGlobal&quot;">
+            <Sections>
+              <Section Name="None">
+                <Member Name="Communication" Datatype="&quot;Connection_Status&quot;">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="RunMode" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="ConnectionFaulted" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                    </Section>
+                  </Sections>
+                </Member>
+                <Member Name="Gen" Datatype="&quot;Exchange_ToGlobal_Gen&quot;">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="Communication" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Selected" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Extracted" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="EnaReq" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="StaReq" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Started" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Unsuspended" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Ena_Suspended" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="sts_Starting" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="sts_Stopping" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="sts_Aborting" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="sts_Suspending" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="sts_Unsuspending" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="sts_Execute" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="sts_Idle" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="sts_Stopped" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="sts_Aborted" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="sts_Suspended" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="sts_ModeManual" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="sts_ModeAutomatic" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="NewAlm" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="NewSign" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="RecipeOnlineLoadDone" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="RecipeOnlineSaveDone" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="RecipeOfflineLoadDone" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="RecipeOfflineSaveDone" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="LastHmiDataLoadDone" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="LastHmiDataSaveDone" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="InverterDiagnosticDone" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="AxisGroupSync" Datatype="Bool" />
+                      <Member Name="CmdMode" Datatype="DInt">
+                        <StartValue>1</StartValue>
+                      </Member>
+                      <Member Name="Mode" Datatype="DInt">
+                        <StartValue>1</StartValue>
+                      </Member>
+                      <Member Name="DisableEnaPbt" Datatype="DInt">
+                        <StartValue>0</StartValue>
+                      </Member>
+                    </Section>
+                  </Sections>
+                </Member>
+                <Member Name="Input" Datatype="&quot;Exchange_ToGlobal_Input&quot;">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="StaPbt" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="StoPbt" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="RstPbt" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="EnaPbt" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_4" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_5" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_6" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_7" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_8" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_9" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_10" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_11" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_12" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_13" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_14" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="_15" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                    </Section>
+                  </Sections>
+                </Member>
+                <Member Name="AlmOk" Datatype="&quot;AlmType&quot;">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="ThSwitch" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="SafeComm" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="SafeEmg" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="SafeGuards" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="GtaAirGroup" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Major" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Minor" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare07" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare08" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare09" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare10" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare11" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare12" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare13" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare14" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare15" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare16" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare17" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare18" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare19" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare20" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare21" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare22" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare23" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare24" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare25" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare26" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare27" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare28" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare29" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare30" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare31" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                    </Section>
+                  </Sections>
+                </Member>
+                <Member Name="AlmCauseOk" Datatype="&quot;AlmCause&quot;">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="Ope" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Ust" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Dst" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Ext" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Mac" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare05" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare06" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare07" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare08" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare09" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare10" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare11" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare12" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare13" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare14" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare15" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare16" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare17" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare18" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare19" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare20" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare21" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare22" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare23" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare24" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare25" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare26" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare27" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare28" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare29" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare30" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Spare31" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                    </Section>
+                  </Sections>
+                </Member>
+                <Member Name="AlmBannerFbk" Datatype="&quot;STD_ALM_BAN_FBK&quot;">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="FirstAlmDetection" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="AlmPriority" Datatype="SInt">
+                        <StartValue>100</StartValue>
+                      </Member>
+                      <Member Name="AlmCategory" Datatype="SInt">
+                        <StartValue>-1</StartValue>
+                      </Member>
+                      <Member Name="AlmCause" Datatype="SInt">
+                        <StartValue>-1</StartValue>
+                      </Member>
+                      <Member Name="AlmID" Datatype="DInt">
+                        <StartValue>-1</StartValue>
+                      </Member>
+                      <Member Name="GlobalAbsTime" Datatype="LInt">
+                        <StartValue>0</StartValue>
+                      </Member>
+                    </Section>
+                  </Sections>
+                </Member>
+                <Member Name="SignBannerFbk" Datatype="&quot;STD_SIGN_BAN_FBK&quot;">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="SignPriority" Datatype="SInt">
+                        <StartValue>100</StartValue>
+                      </Member>
+                      <Member Name="SignCategory" Datatype="SInt">
+                        <StartValue>-1</StartValue>
+                      </Member>
+                      <Member Name="SignID" Datatype="DInt">
+                        <StartValue>-1</StartValue>
+                      </Member>
+                    </Section>
+                  </Sections>
+                </Member>
+                <Member Name="ExtCPU" Datatype="&quot;Exchange_ToGlobal_ExtCPU&quot;">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="PushButton" Datatype="&quot;PushButton&quot;">
+                        <Sections>
+                          <Section Name="None">
+                            <Member Name="StaPbt" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="StoPbt" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="RstPbt" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="EnaPbt" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="EnaReq" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="EnaStaReq" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                          </Section>
+                        </Sections>
+                      </Member>
+                      <Member Name="DeviceDiagDone" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="InverterDiagDone" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                    </Section>
+                  </Sections>
+                </Member>
+                <Member Name="LightSiren" Datatype="&quot;LightSiren_Module&quot;">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="Cfg_StaPbt" Datatype="DInt">
+                        <StartValue>12515</StartValue>
+                      </Member>
+                      <Member Name="Cfg_RstPbt" Datatype="DInt">
+                        <StartValue>-1</StartValue>
+                      </Member>
+                      <Member Name="Cfg_EnaPbt" Datatype="DInt">
+                        <StartValue>12515</StartValue>
+                      </Member>
+                      <Member Name="Cfg_Siren" Datatype="DInt">
+                        <StartValue>3</StartValue>
+                      </Member>
+                      <Member Name="Cfg_Stack" Datatype="DInt">
+                        <StartValue>3</StartValue>
+                      </Member>
+                      <Member Name="Steady" Datatype="&quot;LightSiren&quot;">
+                        <Sections>
+                          <Section Name="None">
+                            <Member Name="StaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="RstPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="EnaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Siren" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="YelStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="BluStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="GrnStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="WhtStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_StaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_RstPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_Siren" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_RedStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_OngStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_GrnStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_BluStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_WhtStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                          </Section>
+                        </Sections>
+                      </Member>
+                      <Member Name="Frequency1" Datatype="&quot;LightSiren&quot;">
+                        <Sections>
+                          <Section Name="None">
+                            <Member Name="StaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="RstPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="EnaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Siren" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="YelStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="BluStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="GrnStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="WhtStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_StaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_RstPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_Siren" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_RedStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_OngStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_GrnStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_BluStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_WhtStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                          </Section>
+                        </Sections>
+                      </Member>
+                      <Member Name="Frequency2" Datatype="&quot;LightSiren&quot;">
+                        <Sections>
+                          <Section Name="None">
+                            <Member Name="StaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="RstPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="EnaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Siren" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="YelStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="BluStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="GrnStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="WhtStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_StaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_RstPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_Siren" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_RedStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_OngStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_GrnStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_BluStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_WhtStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                          </Section>
+                        </Sections>
+                      </Member>
+                      <Member Name="Frequency3" Datatype="&quot;LightSiren&quot;">
+                        <Sections>
+                          <Section Name="None">
+                            <Member Name="StaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="RstPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="EnaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Siren" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="YelStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="BluStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="GrnStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="WhtStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_StaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_RstPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_Siren" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_RedStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_OngStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_GrnStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_BluStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_WhtStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                          </Section>
+                        </Sections>
+                      </Member>
+                      <Member Name="Frequency4" Datatype="&quot;LightSiren&quot;">
+                        <Sections>
+                          <Section Name="None">
+                            <Member Name="StaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="RstPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="EnaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Siren" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="YelStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="BluStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="GrnStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="WhtStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_StaPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_RstPbtLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_Siren" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_RedStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_OngStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_GrnStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_BluStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                            <Member Name="Cust1_WhtStkLgh" Datatype="Bool">
+                              <StartValue>FALSE</StartValue>
+                            </Member>
+                          </Section>
+                        </Sections>
+                      </Member>
+                    </Section>
+                  </Sections>
+                </Member>
+                <Member Name="PackML" Datatype="&quot;PackML_Sts&quot;">
+                  <Sections>
+                    <Section Name="None">
+                      <Member Name="Sts_Aborted" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Aborting" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Clearing" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Complete" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Completing" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Execute" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Held" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Holding" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Idle" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Resetting" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Starting" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Stopped" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Stopping" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Suspended" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_Suspending" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_UnHolding" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_UnSuspending" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_AbortedEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_AbortingEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_ClearingEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_CompleteEnabled" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_CompletingEnabled" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_ExecuteEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_HeldEnabled" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_HoldingEnabled" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_IdleEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_ResettingEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_StartingEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_StoppedEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_StoppingEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_SuspendedEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_SuspendingEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                      <Member Name="Sts_UnHoldingEnabled" Datatype="Bool">
+                        <StartValue>FALSE</StartValue>
+                      </Member>
+                      <Member Name="Sts_UnSuspendingEnabled" Datatype="Bool">
+                        <StartValue>TRUE</StartValue>
+                      </Member>
+                    </Section>
+                  </Sections>
+                </Member>
+                <Member Name="SignOk" Datatype="Bool">
+                  <StartValue>TRUE</StartValue>
+                </Member>
+                <Member Name="Dint" Datatype="Array[0..4] of DInt">
+                  <Subelement Path="0">
+                    <StartValue>0</StartValue>
+                  </Subelement>
+                  <Subelement Path="1">
+                    <StartValue>0</StartValue>
+                  </Subelement>
+                  <Subelement Path="2">
+                    <StartValue>0</StartValue>
+                  </Subelement>
+                  <Subelement Path="3">
+                    <StartValue>0</StartValue>
+                  </Subelement>
+                  <Subelement Path="4">
+                    <StartValue>0</StartValue>
+                  </Subelement>
+                </Member>
+              </Section>
+            </Sections>
+          </Member>
+        </Section>
+      </Sections>
+    </Member>
+  </Section>
+</Sections></Interface>
+      <IsOnlyStoredInLoadMemory>false</IsOnlyStoredInLoadMemory>
+      <IsWriteProtectedInAS>false</IsWriteProtectedInAS>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <Name>DP1</Name>
+      <Namespace />
+      <Number>30</Number>
+      <ProgrammingLanguage>DB</ProgrammingLanguage>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>it-IT</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <MultilingualText ID="4" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="5" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="6" CompositionName="Items">
+            <AttributeList>
+              <Culture>it-IT</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.InstanceDB>
+</Document>
