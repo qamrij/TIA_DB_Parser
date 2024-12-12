@@ -1,12 +1,85 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader_v11\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|c:\\users\\administrator\\source\\repos\\tiadbreader\\tiadbreader\\tiadbreader\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\tiadbreader\\models\\dbinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\models\\dbinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\tiadbreader\\models\\projectinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\models\\projectinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\tiadbreader\\dbbrowser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\dbbrowser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\Program.cs",
+              "RelativeDocumentMoniker": "TiaDBReader\\Program.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\Program.cs",
+              "RelativeToolTip": "TiaDBReader\\Program.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAAAFYAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-12T08:37:35.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DBBrowser.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\DBBrowser.cs",
+              "RelativeDocumentMoniker": "TiaDBReader\\DBBrowser.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\DBBrowser.cs",
+              "RelativeToolTip": "TiaDBReader\\DBBrowser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-12T08:19:43.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DBInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\Models\\DBInfo.cs",
+              "RelativeDocumentMoniker": "TiaDBReader\\Models\\DBInfo.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\Models\\DBInfo.cs",
+              "RelativeToolTip": "TiaDBReader\\Models\\DBInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-12T08:19:12.247Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProjectInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\Models\\ProjectInfo.cs",
+              "RelativeDocumentMoniker": "TiaDBReader\\Models\\ProjectInfo.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\Models\\ProjectInfo.cs",
+              "RelativeToolTip": "TiaDBReader\\Models\\ProjectInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-12T08:19:05.129Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
