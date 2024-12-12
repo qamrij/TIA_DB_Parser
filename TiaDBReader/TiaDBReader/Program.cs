@@ -18,6 +18,14 @@ namespace TiaDBReader
         {
             try
             {
+
+                // Define the base path for exports
+                string CleanbasePath = AppDomain.CurrentDomain.BaseDirectory;
+                string CleanexportsBasePath = Path.Combine(CleanbasePath, "Exports");
+
+                // Step 1: Clean up the Exports folder
+                CleanExportsFolder(CleanexportsBasePath);
+
                 // Initialize helper classes
                 var projectScanner = new ProjectScanner();
                 var dbBrowser = new DBBrowser();
@@ -127,9 +135,10 @@ namespace TiaDBReader
                 if (consolidatedComments.Any())
                 {
                     string completeAlarmListPath = Path.Combine(exportsBasePath, "CompleteAlarmList");
-                    string outputFilePath = Path.Combine(completeAlarmListPath, "Consolidated_AlarmList.xlsx");
+                    string outputFilePath = Path.Combine(completeAlarmListPath, "Alarms.xlsx");
 
-                    excelExporter.ExportComments(consolidatedComments, outputFilePath);
+                    excelExporter.ExportComments(consolidatedComments, completeAlarmListPath);
+                    //excelExporter.ExportComments(consolidatedComments, outputFilePath);
                     Console.WriteLine($"Consolidated alarm list exported to: {outputFilePath}");
                 }
                 else
@@ -192,7 +201,30 @@ namespace TiaDBReader
             return (baseExportPath, exportedDBsPath, exportedCommentsPath, completeAlarmListPath);
         }
 
-       
+
+        private static void CleanExportsFolder(string exportsBasePath)
+        {
+            try
+            {
+                if (Directory.Exists(exportsBasePath))
+                {
+                    Console.WriteLine($"Cleaning up existing Exports folder: {exportsBasePath}");
+                    Directory.Delete(exportsBasePath, true); // Deletes all content recursively
+                }
+
+                // Recreate the folder after cleanup
+                Directory.CreateDirectory(exportsBasePath);
+                Console.WriteLine($"Exports folder is ready: {exportsBasePath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error while cleaning Exports folder: {ex.Message}");
+                throw;
+            }
+        }
+
+
+
         private static void PrintAsciiArt()
         {
             string asciiArtFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pakak.txt");

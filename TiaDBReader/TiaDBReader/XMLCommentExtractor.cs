@@ -15,8 +15,10 @@ namespace TiaDBReader
 
         public List<CommentInfo> ProcessConsolidatedComments(string exportsBasePath, string dbListPath)
         {
-            // Consolidated comments list
             var consolidatedComments = new List<CommentInfo>();
+
+            // Parse DB list to retain order
+            var dbList = ParseDBList(dbListPath);
 
             // Path to CompleteAlarmList folder
             string completeAlarmListPath = Path.Combine(exportsBasePath, "CompleteAlarmList");
@@ -29,27 +31,36 @@ namespace TiaDBReader
             // Get all ExportedDBs directories
             var exportedDBsDirectories = Directory.GetDirectories(exportsBasePath, "ExportedDBs", SearchOption.AllDirectories);
 
-            foreach (var dbsDirectory in exportedDBsDirectories)
+            foreach (var (dbName, customKey) in dbList)
             {
-                Console.WriteLine($"Processing DBs in directory: {dbsDirectory}");
-                // Parse the DB list
-                var dbList = ParseDBList(dbListPath);
-                // Extract comments from this directory
-                var comments = ExtractCommentsFromDirectory(dbsDirectory, dbList);
+                foreach (var dbsDirectory in exportedDBsDirectories)
+                {
+                    Console.WriteLine($"Processing DB: {dbName} in directory: {dbsDirectory}");
 
-                if (comments.Any())
-                {
-                    Console.WriteLine($"Extracted {comments.Count} comments from {dbsDirectory}");
-                    consolidatedComments.AddRange(comments);
-                }
-                else
-                {
-                    Console.WriteLine($"No comments found in {dbsDirectory}");
+                    // Extract comments for this specific DB
+                    var comments = ExtractCommentsForSpecificDB(dbsDirectory, dbName, customKey);
+
+                    if (comments.Any())
+                    {
+                        Console.WriteLine($"Extracted {comments.Count} comments for DB: {dbName}");
+                        consolidatedComments.AddRange(comments);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"No comments found for DB: {dbName}");
+                    }
                 }
             }
 
-            // Return consolidated comments
             return consolidatedComments;
+        }
+
+
+        private List<CommentInfo> ExtractCommentsForSpecificDB(string directoryPath, string dbName, int customKey)
+        {
+            // Logic to extract comments for a specific DB
+            var allComments = ExtractCommentsFromDirectory(directoryPath, new List<(string DBName, int CustomKey)> { (dbName, customKey) });
+            return allComments;
         }
 
         private List<(string DBName, int CustomKey)> ParseDBList(string dbListPath)

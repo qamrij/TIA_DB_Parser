@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TiaDBReader.exe" size="3779040">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TiaDBReader.exe" size="3784160">
       <assemblyIdentity name="TiaDBReader" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6FffOheNrYFZ9bgyf+hj5dhkoS7XmoMWgS3hKPAD2Zo=</dsig:DigestValue>
+        <dsig:DigestValue>fVi8RLwV1fwemT7RNGNDq9vy/xgM/oQ/8n7iRyP3E1w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
