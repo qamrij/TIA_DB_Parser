@@ -7,14 +7,14 @@
     <framework targetVersion="4.8" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="TiaDBReader.exe.manifest" size="13754">
+    <dependentAssembly dependencyType="install" codebase="TiaDBReader.exe.manifest" size="3477">
       <assemblyIdentity name="TiaDBReader.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>PnwKWPdKPo9VgcebpZDeCAqQGnr6gViCcgLbOAdbqWM=</dsig:DigestValue>
+        <dsig:DigestValue>+0ttdJgprKB+IiQ70g0IB/ACk3LLjU4vkO4gCNOhfAU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

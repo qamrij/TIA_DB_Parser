@@ -52,7 +52,7 @@ namespace TiaDBReader
                 {
                     Console.WriteLine("TIA Portal launched successfully.");
 
-                    // Step 4: Loop Through Projects
+                    // Step 4: Export DBs from All Projects
                     foreach (var projectInfo in projects)
                     {
                         if (!projectInfo.IsValid)
@@ -83,14 +83,15 @@ namespace TiaDBReader
                                 {
                                     Console.WriteLine($"Processing PLC: {plcSoftware.Name}");
 
-                                    // Step 4.1: Create Export Directories
+                                    // Create Export Directories
                                     string basePath = AppDomain.CurrentDomain.BaseDirectory;
-                                    var (baseExportPath, exportedDBsPath, exportedCommentsPath) =
+                                    (string baseExportPath,string exportedDBsPath,string exportedCommentsPath, string _) =
                                         CreateExportDirectories(basePath, projectInfo.ProjectName, plcSoftware.Name);
 
                                     Console.WriteLine($"Export directory created: {baseExportPath}");
 
-                                    // Step 4.2: Search and Export DBs
+                                    // Export DBs
+                                    //var foundDBs = dbBrowser.FindDBs(plcSoftware, dbKeys.Select(d => d.DBName).ToList());
                                     var foundDBs = dbBrowser.FindDBs(plcSoftware, dbKeys.Select(d => d.DBName).ToList());
                                     if (foundDBs.Any())
                                     {
@@ -100,22 +101,6 @@ namespace TiaDBReader
                                     else
                                     {
                                         Console.WriteLine("No DBs found to export in this PLC.");
-                                        continue;
-                                    }
-
-                                    // Step 4.3: Extract Comments
-                                    var comments = xmlExtractor.ExtractCommentsFromDirectory(exportedDBsPath, dbKeys);
-                                    Console.WriteLine($"\nTotal comments extracted: {comments.Count}");
-
-                                    // Step 4.4: Export Comments to Excel
-                                    if (comments.Any())
-                                    {
-                                        excelExporter.ExportComments(comments, exportedCommentsPath);
-                                        Console.WriteLine("\nComments exported to Excel.");
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("\nNo comments to export to Excel.");
                                     }
                                 }
                             }
@@ -132,19 +117,82 @@ namespace TiaDBReader
                     }
                 }
 
-                Console.WriteLine("\nAll projects processed successfully.");
+                Console.WriteLine("\nPhase 1 complete: DB export finished.");
+
+                // Step 5: Consolidate Comments
+                Console.WriteLine("\n=== Consolidating Comments ===");
+                string exportsBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Exports");
+                var consolidatedComments = xmlExtractor.ProcessConsolidatedComments(exportsBasePath, dbListPath);
+
+                if (consolidatedComments.Any())
+                {
+                    string completeAlarmListPath = Path.Combine(exportsBasePath, "CompleteAlarmList");
+                    string outputFilePath = Path.Combine(completeAlarmListPath, "Consolidated_AlarmList.xlsx");
+
+                    excelExporter.ExportComments(consolidatedComments, outputFilePath);
+                    Console.WriteLine($"Consolidated alarm list exported to: {outputFilePath}");
+                }
+                else
+                {
+                    Console.WriteLine("No comments to consolidate into the alarm list.");
+                }
+
+                Console.WriteLine("\nProcessing completed. Press any key to exit.");
+                Console.ReadKey();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"\nAn error occurred: {ex.Message}");
             }
-            finally
-            {
-                Console.WriteLine("\nPress any key to exit...");
-                Console.ReadKey();
-            }
         }
 
+        private static (string baseExportPath, string exportedDBsPath, string exportedCommentsPath, string completeAlarmListPath) CreateExportDirectories(
+            string basePath, string selectedProjectName, string selectedPLC)
+        {
+            // Define the main Exports directory
+            string exportsPath = Path.Combine(basePath, "Exports");
+
+            // Ensure the Exports directory exists
+            if (!Directory.Exists(exportsPath))
+            {
+                Directory.CreateDirectory(exportsPath);
+                Console.WriteLine($"Created main Exports directory: {exportsPath}");
+            }
+
+            // Generate unique directory name for the current project and PLC
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            string exportDirectoryName = $"{selectedProjectName}_Exports_PLC-{selectedPLC}_{dateTime}";
+            string baseExportPath = Path.Combine(exportsPath, exportDirectoryName);
+
+            // Define subfolders for DBs, Comments, and CompleteAlarmList
+            string exportedDBsPath = Path.Combine(baseExportPath, "ExportedDBs");
+            string exportedCommentsPath = Path.Combine(baseExportPath, "ExportedComments");
+            string completeAlarmListPath = Path.Combine(exportsPath, "CompleteAlarmList");
+
+            // Create directories
+            try
+            {
+                Directory.CreateDirectory(exportedDBsPath);
+                Directory.CreateDirectory(exportedCommentsPath);
+
+                if (!Directory.Exists(completeAlarmListPath))
+                {
+                    Directory.CreateDirectory(completeAlarmListPath);
+                    Console.WriteLine($"Created CompleteAlarmList directory: {completeAlarmListPath}");
+                }
+
+                Console.WriteLine($"Created export directories:\n- DBs: {exportedDBsPath}\n- Comments: {exportedCommentsPath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating directories: {ex.Message}");
+                throw;
+            }
+
+            return (baseExportPath, exportedDBsPath, exportedCommentsPath, completeAlarmListPath);
+        }
+
+       
         private static void PrintAsciiArt()
         {
             string asciiArtFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pakak.txt");
@@ -175,35 +223,6 @@ namespace TiaDBReader
             }
         }
 
-        private static (string baseExportPath, string exportedDBsPath, string exportedCommentsPath) CreateExportDirectories(
-                                                                                                                            string basePath,
-                                                                                                                            string selectedProjectName,
-                                                                                                                            string selectedPLC)
-        {
-            // Generate unique directory name
-            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-            string exportDirectoryName = $"{selectedProjectName}_Exports_PLC-{selectedPLC}_{dateTime}";
-            string baseExportPath = Path.Combine(basePath, exportDirectoryName);
-
-            // Define subfolders
-            string exportedDBsPath = Path.Combine(baseExportPath, "ExportedDBs");
-            string exportedCommentsPath = Path.Combine(baseExportPath, "ExportedComments");
-
-            // Create directories
-            try
-            {
-                Directory.CreateDirectory(exportedDBsPath);
-                Directory.CreateDirectory(exportedCommentsPath);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error creating directories: {ex.Message}");
-                throw;
-            }
-
-            // Return paths
-            return (baseExportPath, exportedDBsPath, exportedCommentsPath);
-        }
-
+       
     }
 }

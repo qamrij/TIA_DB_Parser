@@ -12,6 +12,73 @@ namespace TiaDBReader
     {
         private XNamespace _namespace;
 
+
+        public List<CommentInfo> ProcessConsolidatedComments(string exportsBasePath, string dbListPath)
+        {
+            // Consolidated comments list
+            var consolidatedComments = new List<CommentInfo>();
+
+            // Path to CompleteAlarmList folder
+            string completeAlarmListPath = Path.Combine(exportsBasePath, "CompleteAlarmList");
+            if (!Directory.Exists(completeAlarmListPath))
+            {
+                Directory.CreateDirectory(completeAlarmListPath);
+                Console.WriteLine($"Created CompleteAlarmList folder: {completeAlarmListPath}");
+            }
+
+            // Get all ExportedDBs directories
+            var exportedDBsDirectories = Directory.GetDirectories(exportsBasePath, "ExportedDBs", SearchOption.AllDirectories);
+
+            foreach (var dbsDirectory in exportedDBsDirectories)
+            {
+                Console.WriteLine($"Processing DBs in directory: {dbsDirectory}");
+                // Parse the DB list
+                var dbList = ParseDBList(dbListPath);
+                // Extract comments from this directory
+                var comments = ExtractCommentsFromDirectory(dbsDirectory, dbList);
+
+                if (comments.Any())
+                {
+                    Console.WriteLine($"Extracted {comments.Count} comments from {dbsDirectory}");
+                    consolidatedComments.AddRange(comments);
+                }
+                else
+                {
+                    Console.WriteLine($"No comments found in {dbsDirectory}");
+                }
+            }
+
+            // Return consolidated comments
+            return consolidatedComments;
+        }
+
+        private List<(string DBName, int CustomKey)> ParseDBList(string dbListPath)
+        {
+            var dbList = new List<(string DBName, int CustomKey)>();
+
+            if (!File.Exists(dbListPath))
+            {
+                Console.WriteLine($"DB list file not found: {dbListPath}");
+                return dbList;
+            }
+
+            foreach (var line in File.ReadAllLines(dbListPath))
+            {
+                var parts = line.Split(',');
+
+                if (parts.Length == 2 && int.TryParse(parts[1], out int customKey))
+                {
+                    dbList.Add((parts[0].Trim(), customKey));
+                }
+                else
+                {
+                    Console.WriteLine($"Invalid line in DB list file: {line}");
+                }
+            }
+
+            return dbList;
+        }
+
         public List<CommentInfo> ExtractCommentsFromDirectory(string directoryPath, List<(string DBName, int CustomKey)> dbKeys)
         {
             var allComments = new List<CommentInfo>();
