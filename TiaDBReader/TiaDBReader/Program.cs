@@ -4,6 +4,11 @@ using TiaDBReader.Models;
 using System.IO;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using System.Threading;
+using TiaDBReader.Services;
+using Siemens.Engineering.SW;
+using Siemens.Engineering;
+
+
 
 namespace TiaDBReader
 {
@@ -13,112 +18,212 @@ namespace TiaDBReader
         {
             try
             {
+
+                // Define the base path for exports
+                string CleanbasePath = AppDomain.CurrentDomain.BaseDirectory;
+                string CleanexportsBasePath = Path.Combine(CleanbasePath, "Exports");
+
+                // Step 1: Clean up the Exports folder
+                CleanExportsFolder(CleanexportsBasePath);
+
                 // Initialize helper classes
-                var tiaConnection = new TiaPortalConnection();
-                var plcBrowser = new PlcBrowser();
+                var projectScanner = new ProjectScanner();
                 var dbBrowser = new DBBrowser();
+                var plcBrowser = new PlcBrowser();
                 var xmlExtractor = new XMLCommentExtractor();
                 var excelExporter = new ExcelExporter();
 
-                // Connect to TIA Portal
-                var tiaPortal = tiaConnection.Connect();
-                if (tiaPortal == null)
+                // Step 1: Discover Projects
+                Console.WriteLine("\n=== Discovering TIA Projects ===");
+                var projects = projectScanner.DiscoverProjects();
+
+                if (!projects.Any())
                 {
-                    Console.WriteLine("Failed to connect to TIA Portal");
+                    Console.WriteLine("No valid projects found. Exiting.");
                     return;
                 }
 
-                // Get the current project
-                var project = tiaConnection.GetCurrentProject();
-                if (project == null)
+                // Step 2: Read DBs from File
+                Console.WriteLine("\n=== Loading DB List from DBs.txt ===");
+                string dbListPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DBs", "DBs.txt");
+                var dbKeys = dbBrowser.ReadDBNamesWithKeysFromFile(dbListPath);
+
+                if (!dbKeys.Any())
                 {
-                    Console.WriteLine("No project found");
+                    Console.WriteLine("No DB names or CustomKeys loaded from DBs.txt. Exiting.");
                     return;
                 }
 
-                // Get and select the PLC
-                var plcSoftwares = plcBrowser.GetAllPlcSoftwares(project).ToList();
-                var selectedPlc = plcBrowser.SelectPLC(plcSoftwares);
-
-                if (selectedPlc != null)
+                // Step 3: Launch TIA Portal in Headless Mode
+                Console.WriteLine("\n=== Launching TIA Portal in headless mode ===");
+                using (var tiaPortal = new TiaPortal(TiaPortalMode.WithoutUserInterface))
                 {
+                    Console.WriteLine("TIA Portal launched successfully.");
 
-                    string basePath = AppDomain.CurrentDomain.BaseDirectory;
-                    string selectedProjectName = project.Name;
-                    string selectedPLCName = selectedPlc.Name;
-
-                    // Create export directories
-                    var (baseExportPath, exportedDBsPath, exportedCommentsPath) = CreateExportDirectories(basePath, selectedProjectName, selectedPLCName);
-
-                    Console.WriteLine($"Export directory created: {baseExportPath}");
-
-
-
-                    Console.WriteLine($"Using base path: {basePath}");
-                    string dbListPath = Path.Combine(basePath, "DBs", "DBs.txt");
-
-                    // Phase 1: Read DB names and CustomKeys from file
-                    Console.WriteLine("\n=== Phase 1: Load DB List ===");
-                    var dbKeys = dbBrowser.ReadDBNamesWithKeysFromFile(dbListPath);
-
-                    if (!dbKeys.Any())
+                    // Step 4: Export DBs from All Projects
+                    foreach (var projectInfo in projects)
                     {
-                        Console.WriteLine("No DB names or CustomKeys loaded from file");
-                        return;
-                    }
+                        if (!projectInfo.IsValid)
+                        {
+                            Console.WriteLine($"Skipping invalid project: {projectInfo.ProjectName}");
+                            continue;
+                        }
 
-                    // Phase 2: Search and export DBs
-                    Console.WriteLine("\n=== Phase 2: DB Search and Export ===");
-                    var foundDBs = dbBrowser.FindDBs(selectedPlc, dbKeys.Select(d => d.DBName).ToList());
-                    if (foundDBs.Any())
-                    {
-                        Console.WriteLine($"\nFound {foundDBs.Count} DBs");
-                        dbBrowser.ExportDBsToXml(foundDBs, exportedDBsPath);
-                    }
-                    else
-                    {
-                        Console.WriteLine("No DBs found to export");
-                        return;
-                    }
+                        Console.WriteLine($"\nProcessing project: {projectInfo.ProjectName}");
 
-                    // Phase 3: Extract comments
-                    Console.WriteLine("\n=== Phase 3: Comment Extraction ===");
-                    var comments = xmlExtractor.ExtractCommentsFromDirectory(exportedDBsPath, dbKeys);
-                    Console.WriteLine($"\nTotal comments extracted: {comments.Count}");
+                        try
+                        {
+                            var project = tiaPortal.Projects.Open(new FileInfo(projectInfo.ProjectPath));
+                            try
+                            {
+                                Console.WriteLine($"Opened project: {projectInfo.ProjectName}");
 
-                    // Phase 4: Export to Excel
-                    if (comments.Any())
-                    {
-                        Console.WriteLine("\n=== Phase 4: Excel Export ===");
-                        excelExporter.ExportComments(comments, exportedCommentsPath);
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nNo comments to export to Excel");
+                                // Retrieve all PLCs in the project
+                                var plcSoftwares = plcBrowser.GetAllPlcSoftwares(project);
+
+                                if (!plcSoftwares.Any())
+                                {
+                                    Console.WriteLine("No PLCs found in the project.");
+                                    continue;
+                                }
+
+                                foreach (var plcSoftware in plcSoftwares)
+                                {
+                                    Console.WriteLine($"Processing PLC: {plcSoftware.Name}");
+
+                                    // Create Export Directories
+                                    string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                                    (string baseExportPath,string exportedDBsPath,string exportedCommentsPath, string _) =
+                                        CreateExportDirectories(basePath, projectInfo.ProjectName, plcSoftware.Name);
+
+                                    Console.WriteLine($"Export directory created: {baseExportPath}");
+
+                                    // Export DBs
+                                    //var foundDBs = dbBrowser.FindDBs(plcSoftware, dbKeys.Select(d => d.DBName).ToList());
+                                    var foundDBs = dbBrowser.FindDBs(plcSoftware, dbKeys.Select(d => d.DBName).ToList());
+                                    if (foundDBs.Any())
+                                    {
+                                        Console.WriteLine($"\nFound {foundDBs.Count} DBs");
+                                        dbBrowser.ExportDBsToXml(foundDBs, exportedDBsPath);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("No DBs found to export in this PLC.");
+                                    }
+                                }
+                            }
+                            finally
+                            {
+                                project.Close();
+                                Console.WriteLine($"Closed project: {projectInfo.ProjectName}");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error processing project {projectInfo.ProjectName}: {ex.Message}");
+                        }
                     }
                 }
-                else 
+
+                Console.WriteLine("\nPhase 1 complete: DB export finished.");
+
+                // Step 5: Consolidate Comments
+                Console.WriteLine("\n=== Consolidating Comments ===");
+                string exportsBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Exports");
+                var consolidatedComments = xmlExtractor.ProcessConsolidatedComments(exportsBasePath, dbListPath);
+
+                if (consolidatedComments.Any())
                 {
-                    // Print ASCII art or fallback message
-                    PrintAsciiArt();
+                    string completeAlarmListPath = Path.Combine(exportsBasePath, "CompleteAlarmList");
+                    string outputFilePath = Path.Combine(completeAlarmListPath, "Alarms.xlsx");
+
+                    excelExporter.ExportComments(consolidatedComments, completeAlarmListPath);
+                    //excelExporter.ExportComments(consolidatedComments, outputFilePath);
+                    Console.WriteLine($"Consolidated alarm list exported to: {outputFilePath}");
+                }
+                else
+                {
+                    Console.WriteLine("No comments to consolidate into the alarm list.");
                 }
 
-                // Clean up resources
-                tiaConnection.Disconnect();
+                Console.WriteLine("\nProcessing completed. Press any key to exit.");
+                Console.ReadKey();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"\nAn error occurred: {ex.Message}");
-                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
-            }
-            finally
-            {
-                
-                
-                Console.WriteLine("\nPress any key to exit...");
-                Console.ReadKey();
             }
         }
+
+        private static (string baseExportPath, string exportedDBsPath, string exportedCommentsPath, string completeAlarmListPath) CreateExportDirectories(
+            string basePath, string selectedProjectName, string selectedPLC)
+        {
+            // Define the main Exports directory
+            string exportsPath = Path.Combine(basePath, "Exports");
+
+            // Ensure the Exports directory exists
+            if (!Directory.Exists(exportsPath))
+            {
+                Directory.CreateDirectory(exportsPath);
+                Console.WriteLine($"Created main Exports directory: {exportsPath}");
+            }
+
+            // Generate unique directory name for the current project and PLC
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            string exportDirectoryName = $"{selectedProjectName}_Exports_PLC-{selectedPLC}_{dateTime}";
+            string baseExportPath = Path.Combine(exportsPath, exportDirectoryName);
+
+            // Define subfolders for DBs, Comments, and CompleteAlarmList
+            string exportedDBsPath = Path.Combine(baseExportPath, "ExportedDBs");
+            string exportedCommentsPath = Path.Combine(baseExportPath, "ExportedComments");
+            string completeAlarmListPath = Path.Combine(exportsPath, "CompleteAlarmList");
+
+            // Create directories
+            try
+            {
+                Directory.CreateDirectory(exportedDBsPath);
+                Directory.CreateDirectory(exportedCommentsPath);
+
+                if (!Directory.Exists(completeAlarmListPath))
+                {
+                    Directory.CreateDirectory(completeAlarmListPath);
+                    Console.WriteLine($"Created CompleteAlarmList directory: {completeAlarmListPath}");
+                }
+
+                Console.WriteLine($"Created export directories:\n- DBs: {exportedDBsPath}\n- Comments: {exportedCommentsPath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating directories: {ex.Message}");
+                throw;
+            }
+
+            return (baseExportPath, exportedDBsPath, exportedCommentsPath, completeAlarmListPath);
+        }
+
+
+        private static void CleanExportsFolder(string exportsBasePath)
+        {
+            try
+            {
+                if (Directory.Exists(exportsBasePath))
+                {
+                    Console.WriteLine($"Cleaning up existing Exports folder: {exportsBasePath}");
+                    Directory.Delete(exportsBasePath, true); // Deletes all content recursively
+                }
+
+                // Recreate the folder after cleanup
+                Directory.CreateDirectory(exportsBasePath);
+                Console.WriteLine($"Exports folder is ready: {exportsBasePath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error while cleaning Exports folder: {ex.Message}");
+                throw;
+            }
+        }
+
+
 
         private static void PrintAsciiArt()
         {
@@ -150,35 +255,6 @@ namespace TiaDBReader
             }
         }
 
-        private static (string baseExportPath, string exportedDBsPath, string exportedCommentsPath) CreateExportDirectories(
-                                                                                                                            string basePath,
-                                                                                                                            string selectedProjectName,
-                                                                                                                            string selectedPLC)
-        {
-            // Generate unique directory name
-            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-            string exportDirectoryName = $"{selectedProjectName}_Exports_PLC-{selectedPLC}_{dateTime}";
-            string baseExportPath = Path.Combine(basePath, exportDirectoryName);
-
-            // Define subfolders
-            string exportedDBsPath = Path.Combine(baseExportPath, "ExportedDBs");
-            string exportedCommentsPath = Path.Combine(baseExportPath, "ExportedComments");
-
-            // Create directories
-            try
-            {
-                Directory.CreateDirectory(exportedDBsPath);
-                Directory.CreateDirectory(exportedCommentsPath);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error creating directories: {ex.Message}");
-                throw;
-            }
-
-            // Return paths
-            return (baseExportPath, exportedDBsPath, exportedCommentsPath);
-        }
-
+       
     }
 }

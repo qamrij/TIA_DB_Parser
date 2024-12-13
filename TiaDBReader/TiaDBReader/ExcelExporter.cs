@@ -32,7 +32,10 @@ namespace TiaDBReader
                     // Salva il file
                     string excelPath = Path.Combine(outputPath, "Alarms.xlsx");
                     workbook.SaveAs(excelPath);
+                    ///string excelFilePath = Path.Combine(outputPath, "Consolidated_AlarmList.xlsx");
+                    ///workbook.SaveAs(excelFilePath);
                     Console.WriteLine($"Excel file saved successfully at: {excelPath}");
+                    ///Console.WriteLine($"Excel file saved successfully at: {excelFilePath}");
                 }
             }
             catch (Exception ex)

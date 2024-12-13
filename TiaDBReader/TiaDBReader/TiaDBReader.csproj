@@ -89,10 +89,10 @@
       <HintPath>..\packages\RBush.4.0.0\lib\net47\RBush.dll</HintPath>
     </Reference>
     <Reference Include="Siemens.Engineering">
-      <HintPath>..\..\..\..\..\..\Program Files\Siemens\Automation\Portal V19\PublicAPI\V19\Siemens.Engineering.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Siemens\Automation\Portal V19\PublicAPI\V19\Siemens.Engineering.dll</HintPath>
     </Reference>
     <Reference Include="Siemens.Engineering.Hmi">
-      <HintPath>..\..\..\..\..\..\Program Files\Siemens\Automation\Portal V19\PublicAPI\V19\Siemens.Engineering.Hmi.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Siemens\Automation\Portal V19\PublicAPI\V19\Siemens.Engineering.Hmi.dll</HintPath>
     </Reference>
     <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
       <HintPath>..\packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
@@ -125,9 +125,11 @@
     <Compile Include="ExcelExporter.cs" />
     <Compile Include="Models\CommentInfo.cs" />
     <Compile Include="Models\DBInfo.cs" />
+    <Compile Include="Models\ProjectInfo.cs" />
     <Compile Include="PlcBrowser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ProjectScanner.cs" />
     <Compile Include="TiaPortalConnection.cs" />
     <Compile Include="XMLCommentExtractor.cs" />
   </ItemGroup>
