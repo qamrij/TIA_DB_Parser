@@ -222,7 +222,7 @@ namespace TiaDBReader
             int subGroupIndex = 0;
             foreach (var subGroup in subGroups)
             {
-                int subGroupID = baseSubGroupID + subGroupIndex; // Incremental SubGroupID
+                int subGroupID = baseSubGroupID; //+ subGroupIndex; // Incremental SubGroupID
                 var subGroupComments = ProcessSubGroup(subGroup, structName, dbName, dbCustomKey, subGroupID,ref globalNumber);
                 comments.AddRange(subGroupComments);
                 subGroupIndex++;

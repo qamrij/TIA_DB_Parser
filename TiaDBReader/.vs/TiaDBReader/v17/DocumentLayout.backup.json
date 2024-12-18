@@ -3,19 +3,19 @@
   "WorkspaceRootPath": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|c:\\users\\administrator\\source\\repos\\tiadbreader\\tiadbreader\\tiadbreader\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|c:\\users\\administrator\\source\\repos\\tiadbreader\\tiadbreader\\tiadbreader\\excelexporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\excelexporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|c:\\users\\administrator\\source\\repos\\tiadbreader\\tiadbreader\\tiadbreader\\xmlcommentextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\xmlcommentextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|c:\\users\\administrator\\source\\repos\\tiadbreader\\tiadbreader\\tiadbreader\\models\\commentinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\tiadbreader\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\tiadbreader\\excelexporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\excelexporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\tiadbreader\\models\\commentinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\models\\commentinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -23,7 +23,7 @@
       "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\dbbrowser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|c:\\users\\administrator\\source\\repos\\tiadbreader\\tiadbreader\\tiadbreader\\services\\projectscanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\tiadbreader\\services\\projectscanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CCC984CE-51C0-4B5D-9B46-F82E31516932}|TiaDBReader\\TiaDBReader.csproj|solutionrelative:tiadbreader\\services\\projectscanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -42,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -54,8 +54,7 @@
               "RelativeToolTip": "TiaDBReader\\Services\\ProjectScanner.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAowDoAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T14:21:17.144Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T14:21:17.144Z"
             },
             {
               "$type": "Document",
@@ -67,12 +66,11 @@
               "RelativeToolTip": "TiaDBReader\\Models\\CommentInfo.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAUwEgAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T14:00:19.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T14:00:19.792Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ExcelExporter.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\ExcelExporter.cs",
               "RelativeDocumentMoniker": "TiaDBReader\\ExcelExporter.cs",
@@ -80,31 +78,30 @@
               "RelativeToolTip": "TiaDBReader\\ExcelExporter.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAwwBkAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T11:31:18.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T11:31:18.792Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "XMLCommentExtractor.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\XMLCommentExtractor.cs",
               "RelativeDocumentMoniker": "TiaDBReader\\XMLCommentExtractor.cs",
               "ToolTip": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\XMLCommentExtractor.cs",
               "RelativeToolTip": "TiaDBReader\\XMLCommentExtractor.cs",
-              "ViewState": "AgIAAAIBAAAAAAAAAAAuwAUBAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAPgAAAAAAAAAAAAuwAYBAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-12T10:47:21.361Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\Program.cs",
               "RelativeDocumentMoniker": "TiaDBReader\\Program.cs",
               "ToolTip": "C:\\Users\\Administrator\\source\\repos\\TiaDBReader\\TiaDBReader\\TiaDBReader\\Program.cs",
               "RelativeToolTip": "TiaDBReader\\Program.cs",
-              "ViewState": "AgIAAF4AAAAAAAAAAAAUwG4AAABhAAAAAAAAAA==",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAAwJAAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-12T08:37:35.137Z",
               "EditorCaption": ""
@@ -119,8 +116,7 @@
               "RelativeToolTip": "TiaDBReader\\DBBrowser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T08:19:43.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T08:19:43.954Z"
             },
             {
               "$type": "Document",
@@ -132,8 +128,7 @@
               "RelativeToolTip": "TiaDBReader\\Models\\DBInfo.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAA5wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T08:19:12.247Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T08:19:12.247Z"
             },
             {
               "$type": "Document",
@@ -145,8 +140,7 @@
               "RelativeToolTip": "TiaDBReader\\Models\\ProjectInfo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T08:19:05.129Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T08:19:05.129Z"
             }
           ]
         }
