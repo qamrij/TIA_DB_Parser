@@ -49,6 +49,38 @@ namespace TiaDBReader
             }
         }
 
+        public void ExportMissingComments(List<MissingCommentElement> missingComments, string outputPath)
+        {
+            var filePath = Path.Combine(outputPath, "Missing_Comments.xlsx");
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Missing Comments");
+
+                // Define headers
+                worksheet.Cell(1, 1).Value = "Element";
+                worksheet.Cell(1, 2).Value = "Problem Description";
+                worksheet.Cell(1, 3).Value = "Different Prefix";
+                      
+
+                // Populate data
+                int row = 2;
+                foreach (var missing in missingComments)
+                {
+                    worksheet.Cell(row, 1).Value = $"{missing.DBName}.{missing.Structure}.{missing.SubGroup}.{missing.ElementName}";
+                    worksheet.Cell(row, 2).Value = missing.Mismatch;
+                    worksheet.Cell(row, 3).Value= missing.WrongPrefix;
+                    row++;
+                }
+
+                worksheet.Columns().AdjustToContents();
+
+                workbook.SaveAs(filePath);
+            }
+
+            Console.WriteLine($"Missing comments exported to: {filePath}");
+        }
+
         private void ConfigureHeaders(IXLWorksheet worksheet)
         {
             var headers = new[]

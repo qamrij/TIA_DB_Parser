@@ -130,7 +130,7 @@ namespace TiaDBReader
                 // Step 5: Consolidate Comments
                 Console.WriteLine("\n=== Consolidating Comments ===");
                 string exportsBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Exports");
-                var consolidatedComments = xmlExtractor.ProcessConsolidatedComments(exportsBasePath, dbListPath);
+                var (consolidatedComments,allMissingComments) = xmlExtractor.ProcessConsolidatedComments(exportsBasePath, dbListPath);
 
                 if (consolidatedComments.Any())
                 {
@@ -144,6 +144,19 @@ namespace TiaDBReader
                 else
                 {
                     Console.WriteLine("No comments to consolidate into the alarm list.");
+                }
+
+                if (allMissingComments.Any())
+                {
+                    string missingListPath = Path.Combine(exportsBasePath, "CompleteAlarmList");
+                    string outputFilePath = Path.Combine(missingListPath, "MissingComments.xlsx");
+
+                    excelExporter.ExportMissingComments(allMissingComments, missingListPath);
+                    Console.WriteLine($"Missing comments list exported to: {outputFilePath}");
+                }
+                else
+                {
+                    Console.WriteLine("No Missing comments found.");
                 }
 
                 Console.WriteLine("\nProcessing completed. Press any key to exit.");
