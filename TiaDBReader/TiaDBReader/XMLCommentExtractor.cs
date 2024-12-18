@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using System.IO;
 using TiaDBReader.Models;
 using System.Runtime.CompilerServices;
+using System.Configuration;
 
 namespace TiaDBReader
 {
@@ -13,9 +14,10 @@ namespace TiaDBReader
         private XNamespace _namespace;
 
 
-        public List<CommentInfo> ProcessConsolidatedComments(string exportsBasePath, string dbListPath)
+        public (List<CommentInfo> Comments, List<MissingCommentElement> MissingComments) ProcessConsolidatedComments(string exportsBasePath, string dbListPath)
         {
             var consolidatedComments = new List<CommentInfo>();
+            var allMissingComments = new List<MissingCommentElement>();
 
             // Parse DB list to retain order
             var dbList = ParseDBList(dbListPath);
@@ -38,7 +40,7 @@ namespace TiaDBReader
                     Console.WriteLine($"Processing DB: {dbName} in directory: {dbsDirectory}");
 
                     // Extract comments for this specific DB
-                    var comments = ExtractCommentsForSpecificDB(dbsDirectory, dbName, customKey);
+                    var (comments, missingComments) = ExtractCommentsForSpecificDB(dbsDirectory, dbName, customKey);
 
                     if (comments.Any())
                     {
@@ -49,18 +51,28 @@ namespace TiaDBReader
                     {
                         Console.WriteLine($"No comments found for DB: {dbName}");
                     }
+                    if (missingComments.Any())
+                    {
+                        Console.WriteLine($"Extracted {missingComments.Count}  missing comments for DB: {dbName}");
+                        allMissingComments.AddRange(missingComments);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"No  missing comments found for DB: {dbName}");
+                    }
+
                 }
             }
 
-            return consolidatedComments;
+            return (consolidatedComments,allMissingComments);
         }
 
 
-        private List<CommentInfo> ExtractCommentsForSpecificDB(string directoryPath, string dbName, int customKey)
+        private (List<CommentInfo> Comments, List<MissingCommentElement> MissingComments) ExtractCommentsForSpecificDB(string directoryPath, string dbName, int customKey)
         {
             // Logic to extract comments for a specific DB
-            var allComments = ExtractCommentsFromDirectory(directoryPath, new List<(string DBName, int CustomKey)> { (dbName, customKey) });
-            return allComments;
+            var (allComments,allMissingComments) = ExtractCommentsFromDirectory(directoryPath, new List<(string DBName, int CustomKey)> { (dbName, customKey) });
+            return (allComments,allMissingComments);
         }
 
         private List<(string DBName, int CustomKey)> ParseDBList(string dbListPath)
@@ -90,9 +102,10 @@ namespace TiaDBReader
             return dbList;
         }
 
-        public List<CommentInfo> ExtractCommentsFromDirectory(string directoryPath, List<(string DBName, int CustomKey)> dbKeys)
+        public (List<CommentInfo> Comments, List<MissingCommentElement> MissingComments) ExtractCommentsFromDirectory(string directoryPath, List<(string DBName, int CustomKey)> dbKeys)
         {
             var allComments = new List<CommentInfo>();
+            var allMissingComments = new List<MissingCommentElement>();
 
             try
             {
@@ -115,8 +128,9 @@ namespace TiaDBReader
 
                     Console.WriteLine($"\nProcessing XML for DB: {dbName} with CustomKey: {customKey}");
 
-                    var commentsFromFile = ExtractCommentsFromFile(xmlPath, dbName, customKey);
+                    var (commentsFromFile, missingCommentsFromFile) = ExtractCommentsFromFile(xmlPath, dbName, customKey);
                     allComments.AddRange(commentsFromFile);
+                    allMissingComments.AddRange(missingCommentsFromFile);
                 }
             }
             catch (Exception ex)
@@ -124,12 +138,13 @@ namespace TiaDBReader
                 Console.WriteLine($"Error processing XML directory: {ex.Message}");
             }
 
-            return allComments;
+            return (allComments,allMissingComments);
         }
 
-        private List<CommentInfo> ExtractCommentsFromFile(string xmlPath, string dbName, int dbCustomKey)
+        private (List<CommentInfo> Comments, List<MissingCommentElement> MissingComments) ExtractCommentsFromFile(string xmlPath, string dbName, int dbCustomKey)
         {
             var comments = new List<CommentInfo>();
+            var missingComment = new List<MissingCommentElement>();
 
             try
             {
@@ -145,7 +160,7 @@ namespace TiaDBReader
                 if (staticSection == null)
                 {
                     Console.WriteLine($"Warning: Static section not found in {dbName}");
-                    return comments;
+                    return (comments,missingComment);
                 }
 
                 foreach (var structName in structuresToFind)
@@ -154,8 +169,9 @@ namespace TiaDBReader
                     int adjustedDbCustomKey = structName.Equals("AlmShort", StringComparison.OrdinalIgnoreCase)
                         ? dbCustomKey + 1
                         : dbCustomKey;
-                    var structureComments = ProcessStructure(staticSection, structName, dbName, adjustedDbCustomKey);
+                    var (structureComments, structureMissingComments) = ProcessStructure(staticSection, structName, dbName, adjustedDbCustomKey);
                     comments.AddRange(structureComments);
+                    missingComment.AddRange(structureMissingComments);
                 }
 
                 Console.WriteLine($"Found {comments.Count} comments in {dbName}");
@@ -165,7 +181,7 @@ namespace TiaDBReader
                 Console.WriteLine($"Error processing XML file {xmlPath}: {ex.Message}");
             }
 
-            return comments;
+            return (comments, missingComment);
         }
 
 
@@ -197,9 +213,10 @@ namespace TiaDBReader
                      .FirstOrDefault(s => s.Attribute("Name")?.Value == "Static");
         }
 
-        private List<CommentInfo> ProcessStructure(XElement staticSection, string structName, string dbName, int dbCustomKey)
+        private (List<CommentInfo> Comments, List<MissingCommentElement> MissingComments) ProcessStructure(XElement staticSection, string structName, string dbName, int dbCustomKey)
         {
             var comments = new List<CommentInfo>();
+            var missingComments = new List<MissingCommentElement>();
 
             // Determine SubGroupID based on structure name
             int baseSubGroupID = structName.Equals("Sign", StringComparison.OrdinalIgnoreCase) ? 5000 : 0;
@@ -210,7 +227,7 @@ namespace TiaDBReader
             if (mainStruct == null)
             {
                 Console.WriteLine($"Structure {structName} not found in DB: {dbName}");
-                return comments;
+                return (comments,missingComments);
             }
 
             Console.WriteLine($"Processing structure: {structName}");
@@ -223,21 +240,23 @@ namespace TiaDBReader
             foreach (var subGroup in subGroups)
             {
                 int subGroupID = baseSubGroupID; //+ subGroupIndex; // Incremental SubGroupID
-                var subGroupComments = ProcessSubGroup(subGroup, structName, dbName, dbCustomKey, subGroupID,ref globalNumber);
+                var (subGroupComments,subGroupMissingComments) = ProcessSubGroup(subGroup, structName, dbName, dbCustomKey, subGroupID,ref globalNumber);
                 comments.AddRange(subGroupComments);
+                missingComments.AddRange(subGroupMissingComments);
                 subGroupIndex++;
             }
 
-            return comments;
+            return (comments, missingComments);
         }
 
-        private List<CommentInfo> ProcessSubGroup(XElement subGroup, string structName, string dbName, int dbCustomKey, int subGroupID, ref int globalNumber)
+        private (List<CommentInfo> Comments,List<MissingCommentElement> MissingComments) ProcessSubGroup(XElement subGroup, string structName, string dbName, int dbCustomKey, int subGroupID, ref int globalNumber)
         {
             var comments = new List<CommentInfo>();
+            var missingComments = new List<MissingCommentElement>();
             var subGroupName = subGroup.Attribute("Name")?.Value;
 
             if (string.IsNullOrEmpty(subGroupName))
-                return comments;
+                return (comments, missingComments);
 
             Console.WriteLine($"Processing subgroup: {subGroupName}");
 
@@ -248,55 +267,81 @@ namespace TiaDBReader
 
             foreach (var member in members)
             {
-                var comment = ExtractComment(member, dbName, dbCustomKey, structName, subGroupName, subGroupID,globalNumber);
+                var (comment,missingComment) = ExtractComment(member, dbName, dbCustomKey, structName, subGroupName, subGroupID,globalNumber);
                 if (comment != null)
                 {
                     comments.Add(comment);
                     globalNumber++;
                 }
+                if (missingComment != null) 
+                {
+                    missingComments.Add(missingComment);
+                }
             }
 
-            return comments;
+            return (comments,missingComments);
         }
 
-        private CommentInfo ExtractComment(XElement member, string dbName, int dbCustomKey, string structName, string subGroupName, int subGroupID, int globalNumber)
+        
+        private (CommentInfo, MissingCommentElement) ExtractComment(XElement member, string dbName, int dbCustomKey, string structName, string subGroupName, int subGroupID, int globalNumber)
         {
             try
             {
                 var numberStr = member.Attribute("Name")?.Value;
                 if (!int.TryParse(numberStr, out int number))
-                    return null;
+                    return (null,null);
                 var commentText = member.Element(_namespace + "Comment")?
                                       .Elements(_namespace + "MultiLanguageText")
                                       .FirstOrDefault(x => x.Attribute("Lang")?.Value == "en-US")?
                                       .Value?.Trim();
 
+                var customKey = dbCustomKey * 10000 + subGroupID + globalNumber;
+
+
+                //generate the expected prefix of the comment
+                var expectedPrefix = $"{ dbName}.{ structName}.{ subGroupName }.{ numberStr}";
+                //alwayse generate the commentinfo object, if no commenttext put empty string
+                var comment = new CommentInfo(dbName, structName, subGroupName, number, globalNumber, commentText??string.Empty, customKey);
+                Console.WriteLine($"  {structName}.{subGroupName}.{number} - CustomKey: {customKey}: {commentText?? "No Comment"}");
+
+                // Handle missing or mismatched comments
                 if (string.IsNullOrEmpty(commentText))
-                    return null;
-
-                var customKey = dbCustomKey *10000 + subGroupID + globalNumber;
-
-                Console.WriteLine($"  {structName}.{subGroupName}.{number} - CustomKey: {customKey}: {commentText}");
-
-                // Create and return the CommentInfo object
-                return new CommentInfo(dbName,structName,subGroupName,number,globalNumber,commentText,customKey);
-
-                /*
-                return new CommentInfo
                 {
-                    DB = dbName,
-                    Structure = structName,
-                    SubGroup = subGroupName,
-                    Number = number,
-                    Comment = commentText,
-                    CustomKey = customKey // Assign the calculated CustomKey
-                };*/
+                    // Missing comment
+                    var mismatch = "missing comment";
+                    var missingComment = new MissingCommentElement(dbName, structName, subGroupName, numberStr,mismatch);
+                    return (comment, missingComment);
+                }
+                else if (!StartsWithPrefix(commentText, expectedPrefix, out string wrongPrefix))
+                {
+
+                    // Mismatched comment
+                    var mismatch = "mismatch detected";
+                    var missingComment = new MissingCommentElement(dbName, structName, subGroupName, numberStr,mismatch,wrongPrefix);
+                    return (comment, missingComment);
+                }
+
+
+                return (comment, null);
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error extracting comment: {ex.Message}");
-                return null;
+                return (null,null);
             }
         }
+
+        private bool StartsWithPrefix(string comment, string expectedPrefix,out string wrongPrefix)
+        {
+            var actualPrefix = comment.Split('>').FirstOrDefault()?.Trim();
+
+            wrongPrefix = actualPrefix;
+            
+            return actualPrefix?.Equals(expectedPrefix, StringComparison.Ordinal) ?? false;
+        }
+
+
+
     }
 }

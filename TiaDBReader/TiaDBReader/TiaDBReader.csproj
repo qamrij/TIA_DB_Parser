@@ -125,6 +125,7 @@
     <Compile Include="ExcelExporter.cs" />
     <Compile Include="Models\CommentInfo.cs" />
     <Compile Include="Models\DBInfo.cs" />
+    <Compile Include="Models\MissingCommentElement.cs" />
     <Compile Include="Models\ProjectInfo.cs" />
     <Compile Include="PlcBrowser.cs" />
     <Compile Include="Program.cs" />
