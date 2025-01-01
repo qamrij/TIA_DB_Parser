@@ -1,7 +1,7 @@
-### TIA DB Reader Project Summary
+### TIA DB Parser Project Summary
 
 #### Overview
-The TIA DB Reader application is designed to interact with Siemens TIA Portal projects using the TIA Openness API. It performs the following operations:
+The TIA DB Parser application is designed to interact with Siemens TIA Portal projects using the TIA Openness API. It performs the following operations:
 
 1. **Project Discovery:**
    - Scans a specified folder for TIA Portal project files.
