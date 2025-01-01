@@ -161,5 +161,3 @@ The TIA DB Reader application is designed to interact with Siemens TIA Portal pr
 - Flexible configuration through `DBs.txt` for specifying target DBs.
 
 ---
-
-Would you like to address any specific aspect of the implementation or add further enhancements?
